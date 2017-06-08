@@ -16,6 +16,12 @@ use Yii;
  */
 class Brand extends \yii\db\ActiveRecord
 {
+    public $imgFile;
+    //验证码
+    public $code;
+    //定义场景常量
+    const SCENARIO_ADD='add';
+    const SCENARIO_EDIT='edit';
     /**
      * @inheritdoc
      */
@@ -30,9 +36,18 @@ class Brand extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'intro', 'logo', 'sort', 'status'], 'required'],
+            [['name', 'intro', 'sort', 'status','code'], 'required'],
             [['intro'], 'string'],
             [['sort', 'status'], 'integer'],
+//            //图片验证规则
+//            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif']],
+//
+            //图片验证规则 ADD
+            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>false,'on'=>self::SCENARIO_ADD],
+            //图片验证规则 EDT
+            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>true,'on'=>self::SCENARIO_EDIT],
+            //验证码规则
+            ['code','captcha','captchaAction'=>'brand/captcha'],
             [['name'], 'string', 'max' => 50],
             [['logo'], 'string', 'max' => 255],
         ];
@@ -50,6 +65,8 @@ class Brand extends \yii\db\ActiveRecord
             'logo' => 'LOGO图片',
             'sort' => '排序',
             'status' => '状态',
+            'imgFile'=>'上传图片',
+            'code'=>'验证码',
         ];
     }
 }
