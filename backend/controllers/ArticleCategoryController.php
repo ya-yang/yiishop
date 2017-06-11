@@ -7,9 +7,11 @@ use yii\web\Request;
 
 class ArticleCategoryController extends \yii\web\Controller
 {
+    //列表
     public function actionIndex()
     {
-        $articlecategorys=ArticleCategory::find()->all();
+        $articlecategorys=ArticleCategory::find()->where('status>-1')->all();
+//        $articlecategorys=ArticleCategory::find()->all();
         return $this->render('index',['articlecategorys'=>$articlecategorys]);
     }
     //添加
@@ -45,13 +47,31 @@ class ArticleCategoryController extends \yii\web\Controller
         }
         return $this->render('add',['model'=>$model]);
     }
-    //删除
-    public function actionDel($id){
+//    //物理删除
+//    public function actionDel($id){
+//        $model=ArticleCategory::findOne(['id'=>$id]);
+//        $model->delete();
+//        \Yii::$app->session->setFlash('danger','删除成功');
+//        return $this->redirect(['article-category/index']);
+//
+//
+//    }
+    //逻辑隐藏
+    public function actionHidden($id){
         $model=ArticleCategory::findOne(['id'=>$id]);
-        $model->delete();
-        \Yii::$app->session->setFlash('danger','删除成功');
+        $model->status=0;
+        $model->save(false);
+        \Yii::$app->session->setFlash('danger','隐藏成功');
         return $this->redirect(['article-category/index']);
 
+    }
+    //逻辑删除
+    public function actionDelete($id){
+        $model=ArticleCategory::findOne(['id'=>$id]);
+        $model->status=-1;
+        $model->save(false);
+        \Yii::$app->session->setFlash('danger','删除成功');
+        return $this->redirect(['article-category/index']);
 
     }
     //验证码配置

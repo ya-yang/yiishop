@@ -28,7 +28,8 @@
                 <td><?=$articlecategory->is_help?'帮助文档':'非帮助文档'?></td>
                 <td>
                     <?=\yii\bootstrap\Html::a('修改',['article-category/edit','id'=>$articlecategory->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['article-category/del','id'=>$articlecategory->id],['onclick'=>'return notice()'])?>
+                    <?=\yii\bootstrap\Html::a('隐藏',['article-category/hidden','id'=>$articlecategory->id])?> /
+                    <?=\yii\bootstrap\Html::a('删除',['article-category/delete','id'=>$articlecategory->id],['onclick'=>'return notice()'])?>
                 </td>
             </tr>
         <?php endforeach;?>

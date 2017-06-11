@@ -30,12 +30,23 @@
                 <td><?=date('Y-m-d H:i:s',$article->create_time)?></td>
                 <td>
                     <?=\yii\bootstrap\Html::a('修改',['article/edit','id'=>$article->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['article/del','id'=>$article->id],['onclick'=>'return notice()'])?> /
+                    <?=\yii\bootstrap\Html::a('删除',['article/delete','id'=>$article->id],['onclick'=>'return notice()'])?> /
+                    <?=\yii\bootstrap\Html::a('隐藏',['article/hidden','id'=>$article->id])?> /
                     <?=\yii\bootstrap\Html::a('详情',['article/detail','id'=>$article->id])?>
                 </td>
             </tr>
         <?php endforeach;?>
     </table>
+</div>
+<div  class="row">
+
+    <div class="col-md-offset-5">
+        <?php
+        echo \yii\widgets\LinkPager::widget([
+            'pagination'=>$page,
+        ]);
+        ?>
+    </div>
 </div>
 </body>
 <script type="text/javascript">

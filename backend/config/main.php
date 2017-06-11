@@ -54,7 +54,17 @@ return [
             'rules' => [ //自定义路由规则
             ],
         ],
+        //设置七牛云上传的配置
+        'qiniu'=>[
+            'class'=>\backend\components\Qiniu::className(),
+            'up_host'=>'http://up-z2.qiniu.com',
+            'accessKey'=>'pZFXUDxDos7APSTST2KyHF3wZQOaZqCp63EkuxHS',
+            'secretKey'=>'qGPl9Vg5JUXLkGFAstUuY9E1O180ryQeRKODLrQI',
+            'bucket'=>'php0217',
+            'domain'=>'http://or9o7h8b8.bkt.clouddn.com/',
+        ]
 
     ],
+
     'params' => $params,
 ];

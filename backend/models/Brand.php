@@ -16,7 +16,8 @@ use Yii;
  */
 class Brand extends \yii\db\ActiveRecord
 {
-    public $imgFile;
+
+
     //验证码
     public $code;
     //定义场景常量
@@ -43,9 +44,9 @@ class Brand extends \yii\db\ActiveRecord
 //            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif']],
 //
             //图片验证规则 ADD
-            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>false,'on'=>self::SCENARIO_ADD],
-            //图片验证规则 EDT
-            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>true,'on'=>self::SCENARIO_EDIT],
+//            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>false,'on'=>self::SCENARIO_ADD],
+//            //图片验证规则 EDT
+//            ['imgFile','file','extensions'=>['jpg','jpeg','png','gif'],'skipOnEmpty'=>true,'on'=>self::SCENARIO_EDIT],
             //验证码规则
             ['code','captcha','captchaAction'=>'brand/captcha'],
             [['name'], 'string', 'max' => 50],
@@ -65,7 +66,6 @@ class Brand extends \yii\db\ActiveRecord
             'logo' => 'LOGO图片',
             'sort' => '排序',
             'status' => '状态',
-            'imgFile'=>'上传图片',
             'code'=>'验证码',
         ];
     }

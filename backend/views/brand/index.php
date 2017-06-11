@@ -15,6 +15,7 @@
             <td>logo</td>
             <td>排序</td>
             <td>状态</td>
+            <td>操作</td>
 
         </tr>
         <?php foreach($brands as $brand):?>
@@ -22,11 +23,13 @@
                 <td><?=$brand->id?></td>
                 <td><?=$brand->name?></td>
                 <td><?=$brand->intro?></td>
-                <td><?= \yii\bootstrap\Html::img($brand->logo,['width'=>40])?></td>
+                <td><?=$brand->logo?\yii\bootstrap\Html::img($brand->logo,['width'=>40]):''?></td>
                 <td><?=$brand->sort?></td>
+                <td><?=$brand->status?'正常':'隐藏'?></td>
                 <td>
                     <?=\yii\bootstrap\Html::a('修改',['brand/edit','id'=>$brand->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['brand/del','id'=>$brand->id],['onclick'=>'return notice()'])?>
+                    <?=\yii\bootstrap\Html::a('隐藏',['brand/hidden','id'=>$brand->id])?> /
+                    <?=\yii\bootstrap\Html::a('删除',['brand/delete','id'=>$brand->id],['onclick'=>'return notice()'])?>
                 </td>
             </tr>
         <?php endforeach;?>
