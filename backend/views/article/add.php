@@ -7,8 +7,7 @@ echo $form->field($model,'intro')->textarea();
 
 echo $form->field($articledetail,'content')->textarea();
 
-echo $form->field($model, 'article_category_id')->dropDownList(yii\helpers\ArrayHelper::map($articlecategorys,'id','name'));
-
+echo $form->field($model, 'article_category_id')->dropDownList(\backend\models\Article::getCategorys(),['prompt'=>'=请选择分类=']);
 echo $form->field($model,'sort');
 
 echo $form->field($model,'status',['inline'=>true])->radioList([0=>'隐藏',1=>'正常']);

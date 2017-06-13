@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "article".
@@ -59,6 +60,9 @@ class Article extends \yii\db\ActiveRecord
             'status' => '状态',
             'create_time' => '创建时间',
         ];
+    }
+    public static function getCategorys(){
+        return ArrayHelper::map(ArticleCategory::find()->where(['status'=>1])->asArray()->all(),'id','name');
     }
 
     public function  beforeSave($insert){

@@ -28,13 +28,13 @@ class ArticleController extends \yii\web\Controller
     public function actionAdd(){
         $model=new Article();
         $articledetail=new ArticleDetail();
-        $articlecategorys=ArticleCategory::find()->all();
         $request=new Request();
         if($request->isPost){
             $model->load($request->post());
             $articledetail->load($request->post());
-            if($model->validate()){
+            if($model->validate() && $articledetail->validate()){
                 $model->save(false);
+                $articledetail->article_id=$model->id;
                 $articledetail->save(false);
                 \Yii::$app->session->setFlash('success','添加成功');
                 return $this->redirect(['article/index']);
@@ -43,18 +43,18 @@ class ArticleController extends \yii\web\Controller
                 exit;
             }
         }
-        return $this->render('add',['model'=>$model,'articlecategorys'=>$articlecategorys,'articledetail'=>$articledetail]);
+
+        return $this->render('add',['model'=>$model,'articledetail'=>$articledetail]);
     }
     //修改
     public function actionEdit($id){
         $model=Article::findOne(['id'=>$id]);
         $articledetail=ArticleDetail::findOne(['article_id'=>$id]);
-        $articlecategorys=ArticleCategory::find()->all();
         $request=new Request();
         if($request->isPost){
             $model->load($request->post());
             $articledetail->load($request->post());
-            if($model->validate()){
+            if($model->validate()&&$articledetail->validate()){
                 $model->save(false);
                 $articledetail->save(false);
                 \Yii::$app->session->setFlash('success','修改成功');
@@ -64,7 +64,7 @@ class ArticleController extends \yii\web\Controller
                 exit;
             }
         }
-        return $this->render('add',['model'=>$model,'articlecategorys'=>$articlecategorys,'articledetail'=>$articledetail]);
+        return $this->render('add',['model'=>$model,'articledetail'=>$articledetail]);
     }
     //删除(物理删除)
 //    public function actionDel($id){

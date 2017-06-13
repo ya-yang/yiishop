@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "89f76f7a613e8ba32ba677de1132b774",
+    "content-hash": "f8832a9a49b926974effcce207dc0991",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -303,6 +303,46 @@
             "time": "2016-08-31 00:36:28"
         },
         {
+            "name": "creocoder/yii2-nested-sets",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creocoder/yii2-nested-sets.git",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/creocoder/yii2-nested-sets/cb8635a459b6246e5a144f096b992dcc30cf9954.zip",
+                "reference": "cb8635a459b6246e5a144f096b992dcc30cf9954",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "creocoder\\nestedsets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kochetov",
+                    "email": "creocoder@gmail.com"
+                }
+            ],
+            "description": "The nested sets behavior for the Yii framework",
+            "keywords": [
+                "nested sets",
+                "yii2"
+            ],
+            "time": "2015-01-27T10:53:51+00:00"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.9.3",
             "source": {
@@ -348,6 +388,39 @@
                 "html"
             ],
             "time": "2017-06-03T02:28:16+00:00"
+        },
+        {
+            "name": "kucha/ueditor",
+            "version": "1.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BigKuCha/yii2-ueditor-widget.git",
+                "reference": "59e4ab2533bec1b182ce38241a1567e78d57a509"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/BigKuCha/yii2-ueditor-widget/59e4ab2533bec1b182ce38241a1567e78d57a509.zip",
+                "reference": "59e4ab2533bec1b182ce38241a1567e78d57a509",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kucha\\ueditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "BigKuCha",
+                    "email": "nevermore1989@vip.qq.com"
+                }
+            ],
+            "description": "desc",
+            "time": "2017-01-15T06:29:37+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
