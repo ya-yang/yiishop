@@ -13,7 +13,8 @@ class m170612_052746_create_goods_day_count_table extends Migration
     public function up()
     {
         $this->createTable('goods_day_count', [
-            'day' => $this->date()->comment('日期'),
+            'id' =>$this->primaryKey() ,
+            'day' => $this->date()->comment('日期') ,
             'count'=>$this->integer()->comment('商品数'),
         ]);
     }

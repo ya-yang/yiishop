@@ -2,7 +2,9 @@
 /* @var $this yii\web\View */
 ?>
 <h1>user/index</h1>
-<?= \yii\bootstrap\Html::a('新增管理员',['user/add'],['class'=>'btn btn-default glyphicon glyphicon-user'])?><br><br>
+<?= \yii\bootstrap\Html::a('新增管理员',['user/add'],['class'=>'btn btn-default glyphicon glyphicon-user'])?>　
+<?= \yii\bootstrap\Html::a('注销登录',['user/logout'])?>
+<br><br>
 <table class="table table-striped">
     <tr>
         <td>ID</td>

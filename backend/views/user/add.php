@@ -3,7 +3,10 @@ $form=\yii\bootstrap\ActiveForm::begin();
 
 echo $form->field($model,'username');
 
-echo $form->field($model,'password_hash')->passwordInput();
+if(!$model->password_hash){echo $form->field($model,'password')->passwordInput();
+
+echo $form->field($model,'repassword')->passwordInput();
+}
 
 echo $form->field($model,'email');
 
