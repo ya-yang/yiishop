@@ -48,6 +48,7 @@ class GoodsController extends \yii\web\Controller
                 //生成sn
                 //先根据日期查询daycount表
                 $goodscount=GoodsDayCount::findOne(['day'=>date('Y-m-d')]);
+
                 if($goodscount == null){
                     $daycount=new GoodsDayCount();
                     $daycount->day=date('Y-m-d');
@@ -55,7 +56,7 @@ class GoodsController extends \yii\web\Controller
                     $daycount->save();
                 }
                 //%d - 包含正负号的十进制数（负数、0、正数）
-                $model->sn=date('Ymd').sprintf("%05d",($goodscount->count)+1);
+                $model->sn=date('Ymd').sprintf("%05d",$goodscount->count+1);
                 //保存goods表
                 $model->save();
                 //保存intro表

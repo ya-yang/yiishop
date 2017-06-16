@@ -87,12 +87,12 @@ class GoodsAlbumController extends \yii\web\Controller
             }else{
                 var_dump($model->getErrors());
             }
+            echo json_encode([
+                'initialPreview' => $p1,
+                'initialPreviewConfig' => $p2,
+                'append' => true,
+            ]);
         }
-        echo json_encode([
-            'initialPreview' => $p1,
-            'initialPreviewConfig' => $p2,
-            'append' => true,
-        ]);
         return ;
     }
 

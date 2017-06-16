@@ -22,11 +22,13 @@ class UserController extends \yii\web\Controller
         if($request->isPost){
             $model->load($request->post());
             if($model->validate()){
-
-//                var_dump($model);die;
                 $model->save(false);
                 //注册成功后自动登录
+                if(\Yii::$app->user->login($model)){
+
+                }
                 \Yii::$app->session->setFlash('success','注册成功');
+                \Yii::$app->user->login($model);
                 return $this->redirect(['user/index']);
             }else{
                 var_dump($model->getErrors());
@@ -73,9 +75,11 @@ class UserController extends \yii\web\Controller
             $model->load($request->post());
             if($model->validate()){
                 //跳转到检测页面
-                return $this->redirect(['user/index']);
+
+                return $this->redirect(['user/test']);
             }else{
                 var_dump($model->getErrors());
+
             }
         }
         return $this->render('login',['model'=>$model]);
