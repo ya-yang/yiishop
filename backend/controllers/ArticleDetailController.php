@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-class ArticleDetailController extends \yii\web\Controller
+class ArticleDetailController extends BackendController
 {
     public function actionIndex()
     {

@@ -7,7 +7,7 @@ use backend\models\GoodsCategory;
 use yii\helpers\Json;
 use yii\web\Request;
 
-class GoodsCategoryController extends \yii\web\Controller
+class GoodsCategoryController extends BackendController
 {
     //列表
     public function actionIndex()

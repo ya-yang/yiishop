@@ -1,3 +1,7 @@
+<?php
+/* @var $this yii\web\View */
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +31,9 @@
                 <td><?=$brand->sort?></td>
                 <td><?=$brand->status?'正常':'隐藏'?></td>
                 <td>
-                    <?=\yii\bootstrap\Html::a('修改',['brand/edit','id'=>$brand->id])?> /
-                    <?=\yii\bootstrap\Html::a('隐藏',['brand/hidden','id'=>$brand->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['brand/delete','id'=>$brand->id],['onclick'=>'return notice()'])?>
+                    <?= \Yii::$app->user->can('brand/edit')?\yii\bootstrap\Html::a('修改',['brand/edit','id'=>$brand->id]):''?> /
+                    <?= \Yii::$app->user->can('brand/hidden')?\yii\bootstrap\Html::a('隐藏',['brand/hidden','id'=>$brand->id]):''?> /
+                    <?=\Yii::$app->user->can('brand/del')?\yii\bootstrap\Html::a('删除',['brand/delete','id'=>$brand->id],['onclick'=>'return notice()']):''?>
                 </td>
             </tr>
         <?php endforeach;?>

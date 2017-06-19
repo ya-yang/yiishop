@@ -34,9 +34,9 @@ echo '　'.\yii\bootstrap\Html::submitButton('搜索',['class'=>'btn btn-success
         <td><?=$model->logo?\yii\bootstrap\Html::img($model->logo,['width'=>40]):'' ?></td>
         <td><?=date('Y-m-d H:i:s',$model->create_time)?></td>
         <td>
-            <?= \yii\bootstrap\Html::a('相册',['goods-album/album','id'=>$model->id],['class'=>'btn btn-default glyphicon glyphicon-picture'])  ?>　
-            <?= \yii\bootstrap\Html::a('修改',['goods/edit','id'=>$model->id],['class'=>'btn btn-default glyphicon glyphicon-pencil'])?>　
-            <?= \yii\bootstrap\Html::a('删除',['goods/del','id'=>$model->id],['class'=>'btn btn btn-default glyphicon glyphicon-trash'])?>
+            <?= \Yii::$app->user->can('goods-album/album')?\yii\bootstrap\Html::a('相册',['goods-album/album','id'=>$model->id],['class'=>'btn btn-default glyphicon glyphicon-picture']):''  ?>　
+            <?= \Yii::$app->user->can('goods/edit')?\yii\bootstrap\Html::a('修改',['goods/edit','id'=>$model->id],['class'=>'btn btn-default glyphicon glyphicon-pencil']):''?>　
+            <?= \Yii::$app->user->can('goods/del')?\yii\bootstrap\Html::a('删除',['goods/del','id'=>$model->id],['class'=>'btn btn btn-default glyphicon glyphicon-trash']):''?>
         </td>
     </tr>
     <?php endforeach; ?>

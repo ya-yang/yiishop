@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\PermissionForm;
+use backend\models\RoleForm;
 use yii\web\NotFoundHttpException;
 
 class RbacController extends \yii\web\Controller
@@ -64,7 +65,53 @@ class RbacController extends \yii\web\Controller
 
     //添加角色
     public function actionAddRole(){
+        $model=new RoleForm();
+        if($model->load(\Yii::$app->request->post())&& $model->validate() ){
+            if($model->addRole()){
+                \Yii::$app->session->setFlash('添加角色成功');
+                return $this->redirect('role-index');
+            }
+        }
+        return $this->render('add-role',['model'=>$model]);
+    }
 
+    //修改角色
+    public function actionEditRole($name){
+        $authManager=\Yii::$app->authManager;
+        $role=$authManager->getRole($name);
+        //判断是否有该角色
+        if($role == null){
+            throw new NotFoundHttpException('没有此角色');
+        }
+        $model=new RoleForm();
+        //加载数据
+        $model->loadData($role);
+        if($model->load(\Yii::$app->request->post()) && $model->validate()){
+            if($model->updateRole($name)){
+                \Yii::$app->session->setFlash('修改角色成功');
+                return $this->redirect('role-index');
+
+            }
+
+        }
+        return $this->render('add-role',['model'=>$model]);
+    }
+
+    //删除角色
+    public function actionDelRole($name){
+        $authManger=\Yii::$app->authManager;
+        $role = $authManger->getRole($name);
+        $authManger->remove($role);
+        \Yii::$app->session->setFlash('success','删除角色成功');
+        return $this->redirect('role-index');
+
+    }
+
+    //角色列表
+    public function actionRoleIndex(){
+        $authManger=\Yii::$app->authManager;
+        $roles=$authManger->getRoles();
+        return $this->render('role-index',['roles'=>$roles]);
     }
 
 }

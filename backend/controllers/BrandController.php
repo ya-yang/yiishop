@@ -9,8 +9,9 @@ use yii\web\Request;
 use yii\web\UploadedFile;
 use crazyfd\qiniu\Qiniu;
 
-class BrandController extends \yii\web\Controller
+class BrandController extends BackendController
 {
+
     //列表页面
     public function actionIndex()
     {

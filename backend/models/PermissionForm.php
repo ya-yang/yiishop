@@ -11,6 +11,8 @@ class PermissionForm extends Model
 {
     public $name;
     public $description;
+
+    //验证规则
     public function rules(){
         return [
             [['name','description'],'required'],
@@ -19,6 +21,8 @@ class PermissionForm extends Model
         ];
 
     }
+
+    //标签中文名
     public function attributeLabels(){
         return [
             'name'=>'名称',
@@ -26,6 +30,7 @@ class PermissionForm extends Model
         ];
     }
 
+    //添加权限
     public function addPermission(){
         //实例化authManager模型
         $authManager=\Yii::$app->authManager;
@@ -41,16 +46,21 @@ class PermissionForm extends Model
         }
         return false;
     }
+
+    //加载数据
     public function loadData(Permission $permission){
         //反着赋值
         $this->name=$permission->name;
         $this->description=$permission->description;
 
     }
+
+    //修改权限
     public function updatePermission($name){
         //实例化组件
         $authManager=\Yii::$app->authManager;
         $permission=$authManager->getPermission($name);
+        //如果角色名被修改，检查修改后的名称是否已存在
         if($name != $this->name && $authManager->getPermission($this->name)){
             $this->addError('name','该权限已存在');
         }else{

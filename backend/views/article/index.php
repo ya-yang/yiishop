@@ -29,10 +29,10 @@
                 <td><?=$article->status?'正常':'隐藏'?></td>
                 <td><?=date('Y-m-d H:i:s',$article->create_time)?></td>
                 <td>
-                    <?=\yii\bootstrap\Html::a('修改',['article/edit','id'=>$article->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['article/delete','id'=>$article->id],['onclick'=>'return notice()'])?> /
-                    <?=\yii\bootstrap\Html::a('隐藏',['article/hidden','id'=>$article->id])?> /
-                    <?=\yii\bootstrap\Html::a('详情',['article/detail','id'=>$article->id])?>
+                    <?=\Yii::$app->user->can('article/edit')?\yii\bootstrap\Html::a('修改',['article/edit','id'=>$article->id]):''?> /
+                    <?=\Yii::$app->user->can('article/delete')?\yii\bootstrap\Html::a('删除',['article/delete','id'=>$article->id],['onclick'=>'return notice()']):''?> /
+                    <?=\Yii::$app->user->can('article/hidden')?\yii\bootstrap\Html::a('隐藏',['article/hidden','id'=>$article->id]):''?> /
+                    <?=\Yii::$app->user->can('article/detail')?\yii\bootstrap\Html::a('详情',['article/detail','id'=>$article->id]):''?>
                 </td>
             </tr>
         <?php endforeach;?>

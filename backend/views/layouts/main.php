@@ -27,38 +27,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    NavBar::begin([
-        'brandLabel' => '京西商城后台',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-//        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => '品牌', 'url' => ['/brand/index']],
-        ['label' => '文章', 'url' => ['/article/index']],
-        ['label' => '商品', 'url' => ['/goods/index']],
-        ['label' => '商品分类', 'url' => ['/goods-category/index']],
-        ['label' => '管理员', 'url' => ['/user/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/user/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
+    echo backend\widgets\MenuWidget::widget();
     ?>
 
     <div class="container">
@@ -72,7 +41,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; yang ya <?= date('Y') ?></p>
+        <p class="pull-left">&copy; ya yang <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

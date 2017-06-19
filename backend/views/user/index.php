@@ -24,7 +24,8 @@
         <td><?=$user->last_login_time?date('Y-m-d:H:i:s',$user->last_login_time):'-'?></td>
         <td>
             <?= \yii\bootstrap\Html::a('修改',['user/edit','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-pencil'])?>　
-            <?= \yii\bootstrap\Html::a('删除',['user/del','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-trash'])?>
+            <?= \yii\bootstrap\Html::a('删除',['user/del','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-trash'])?>　
+            <?= \yii\bootstrap\Html::a('角色',['user/edit-role','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-lock'])?>
         </td>
     </tr>
     <?php endforeach; ?>

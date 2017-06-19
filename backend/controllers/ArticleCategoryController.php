@@ -5,8 +5,9 @@ namespace backend\controllers;
 use backend\models\ArticleCategory;
 use yii\web\Request;
 
-class ArticleCategoryController extends \yii\web\Controller
+class ArticleCategoryController extends BackendController
 {
+
     //列表
     public function actionIndex()
     {

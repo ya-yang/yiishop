@@ -3,13 +3,13 @@
 namespace backend\controllers;
 
 use backend\models\Article;
-use backend\models\ArticleCategory;
 use backend\models\ArticleDetail;
 use yii\data\Pagination;
 use yii\web\Request;
 
-class ArticleController extends \yii\web\Controller
+class ArticleController extends BackendController
 {
+
     //列表
     public function actionIndex()
     {

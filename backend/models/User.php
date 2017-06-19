@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -25,6 +26,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public static $statusoption=[1=>'启用',0=>'禁用'];
     public $repassword;
     public $password;
+    //角色
+    public $roles;
     //定义常量
     const SCENARIO_ADD='add';
     const SCENARIO_EDIT='edit';
@@ -55,6 +58,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['email', 'email','message'=>'请输入正确的邮箱'],
             //对比两个属性 对比两次输入的新密码是否一致
             ['repassword','compare','compareAttribute'=>'password','message'=>'两次密码不一致','on'=>self::SCENARIO_ADD],
+            ['roles','safe']
         ];
     }
 
@@ -75,7 +79,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'updated_at' => '更新时间',
             'last_login_time' => '最后登录时间',
             'last_login_ip' => '最后登录IP',
-            'repassword'=>'确认密码'
+            'repassword'=>'确认密码',
+            'roles'=>'角色',
         ];
     }
     public function beforeSave($insert){
@@ -91,6 +96,33 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             $this->password_hash=\Yii::$app->security->generatePasswordHash($this->password);
         }
         return parent::beforeSave($insert);
+    }
+    //获取所有角色选项
+    public static function getRoleoptions(){
+        $authManager=Yii::$app->authManager;
+        return ArrayHelper::map($authManager->getRoles(),'name','name');
+
+    }
+    //获取角色
+    public function loadData($id){
+        //角色回显
+        $roles=\Yii::$app->authManager->getRolesByUser($id);
+        foreach ($roles as $role){
+            $this->roles[]=$role->name;
+        }
+        return $this->roles;
+    }
+    public function updateRole($id){
+        //清空所有的角色
+        $authManager=\Yii::$app->authManager;
+        $authManager->revokeAll($id);
+        //在赋值
+        foreach ($this->roles as $roleName) {
+            $role = $authManager->getRole($roleName);
+            $authManager->assign($role, $id);
+        }
+        return true;
+
     }
 
     /**

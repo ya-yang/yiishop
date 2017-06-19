@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 
 
+use backend\components\RbacFilter;
 use backend\models\Goods;
 use backend\models\GoodsAlbum;
 use backend\models\GoodsCategory;
@@ -18,8 +19,10 @@ use yii\helpers\Url;
 use yii\web\Request;
 use yii\web\UploadedFile;
 
-class GoodsController extends \yii\web\Controller
+class GoodsController extends BackendController
 {
+
+
     //列表
     public function actionIndex()
     {

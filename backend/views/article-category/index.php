@@ -27,9 +27,9 @@
                 <td><?=$articlecategory->status?'正常':'隐藏'?></td>
                 <td><?=$articlecategory->is_help?'帮助文档':'非帮助文档'?></td>
                 <td>
-                    <?=\yii\bootstrap\Html::a('修改',['article-category/edit','id'=>$articlecategory->id])?> /
-                    <?=\yii\bootstrap\Html::a('隐藏',['article-category/hidden','id'=>$articlecategory->id])?> /
-                    <?=\yii\bootstrap\Html::a('删除',['article-category/delete','id'=>$articlecategory->id],['onclick'=>'return notice()'])?>
+                    <?=\Yii::$app->user->can('article-category/edit')?\yii\bootstrap\Html::a('修改',['article-category/edit','id'=>$articlecategory->id]):''?> /
+                    <?=\Yii::$app->user->can('article-category/hidden')?\yii\bootstrap\Html::a('隐藏',['article-category/hidden','id'=>$articlecategory->id]):''?> /
+                    <?=\Yii::$app->user->can('article-category/delete')?\yii\bootstrap\Html::a('删除',['article-category/delete','id'=>$articlecategory->id],['onclick'=>'return notice()']):''?>
                 </td>
             </tr>
         <?php endforeach;?>

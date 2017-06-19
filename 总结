@@ -7,9 +7,8 @@
 
 0609
     1.文章分类的增删改查
-
-    2.文章表使用垂直分表,分两张表保存,文章表(article)和文章分类表(article_category)
-    3.文章表的增删改查(多模型同时输入)
+        文章表使用垂直分表,分两张表保存,文章表(article)和文章分类表(article_category),文章表的增删改查(多模型同时输入)
+        相当于就是使用了一个一对一的关系
 
 
 0611
@@ -42,6 +41,62 @@
     创建一个表单模型LoginForm的model继承Model
     在模型中除了已有的验证方法，还需要自己定义一个验证方法来验证用户名和密码是否正确，因为数据库里设计的是用户名是唯一值所以，先查询用户名是否存在 在根据用户名查询此条数据。在比对密码是否正确，数据库的密码是加密的儿用户输入的密码不是加密的，这里Yii中有一个方法来比对\Yii::$app->security->validatePassword(输入的密码(无加密),数据库密码(加密));
     基于cookie的自动登录没有思路！百度了也没看懂！等老师讲~
+0615
+    基于cookie的自动登录;
+    自动登录：就是当用户选择了记住我以后 用户在关闭浏览器后下一次打开浏览器访问页面时候还是登录状态
+    自动登录三步走：
+        第一步：在user组件中添加这个参数'enableAutoLogin' => true,
+        第二步：在模型中
+                    public function getAuthKey()
+                    {
+                        return $this->auth_key;
+                    }
+        第三步：在模型中比对auth_key
+                public function validateAuthKey($authKey)
+                    {
+                        return $this->auth_key == $authKey;
+                    }
+
+
+
+
+
+0616
+    使用RBAC管理用户和权限
+        a.在common->config->main->components配置'authManager'=>['class'=>\yii\rbac\DbManager::className(),]参数
+        b.yii中跟我们建立好了4张权限表 命令：yii migrate --migrationPath=@yii/rbac/migrations
+    权限增删改查
+       authManager里面有各自的函数
+       添加：authManager->createPermission()
+       修改：$authManager->update($name,$permission)
+       获取所有权限：authManager->getPermissions()
+       删除：$authManger->remove($permission)
+    角色增删改查
+        添加：$authManger->createRole()
+        修改：$authManger->update($name,$role)
+        删除：$authManger->remove($role)
+        查询：authManager->getRoles()
+    角色和权限关联
+        注意修改的时候要先清除所有的权限再重新循环添加选中的权限
+        //清空权限
+        $authManger->removeChildren($role);
+    用户和角色关联
+
+
+
+
+0618
+    菜单的增删改查
+        a.菜单我们是要到了组件widgets 组件 显示关联的菜单 使用到了过滤器 配合rbac来使用
+        b.定义一个过滤器XxxFilter extents ActionFilter  实现beforeAction的操作
+        c.在什么什么之前执行这个过滤器  \Yii::$app->user->can(xx->uniqueId)判断当前路由该用户有没权限如果没有抛出异常 throw new  HttpException(403,'你没有权限访问该页面');
+        d.为了用户体验 在判断是否是游客，User组件里面\Yii::$app->user->isGuest 就可以判断是否是游客登录 因为过滤器没有controller的redirect操作 所有我们先找当前对象的controller再找redirect,我们还需要在控制器中写一个行为 该行为使用到这条过滤器 public function beheavies,使用到这个过滤器 就可以阻止没有权限的用户操作该操作
+
+
+
+
+到此后台就已经圆满结束啦 明天开始迎来我们的前台时代 T_T......
+总的来说自己的情况感觉就是学一点忘一点的比如有时候老师写到js的时候感觉完全懵逼 还是下来练习的的时间太少了。没有复习与巩固，代码量太少 。加油加油咯 最后一个月！！！！！！！！！
 
 
 

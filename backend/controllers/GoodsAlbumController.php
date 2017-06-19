@@ -6,7 +6,7 @@ use backend\models\GoodsAlbum;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
-class GoodsAlbumController extends \yii\web\Controller
+class GoodsAlbumController extends BackendController
 {
     public function actionIndex()
     {
