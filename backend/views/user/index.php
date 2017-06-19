@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 ?>
 <h1>user/index</h1>
-<?= \yii\bootstrap\Html::a('新增管理员',['user/add'],['class'=>'btn btn-default glyphicon glyphicon-user'])?>　
+<?= \Yii::$app->user->can('user/add')?\yii\bootstrap\Html::a('新增管理员',['user/add'],['class'=>'btn btn-default glyphicon glyphicon-user']):''?>　
 <?= \yii\bootstrap\Html::a('注销登录',['user/logout'])?>
 <br><br>
 <table class="table table-striped">
@@ -23,8 +23,8 @@
         <td><?=$user->last_login_ip?$user->last_login_ip:'-'?></td>
         <td><?=$user->last_login_time?date('Y-m-d:H:i:s',$user->last_login_time):'-'?></td>
         <td>
-            <?= \yii\bootstrap\Html::a('修改',['user/edit','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-pencil'])?>　
-            <?= \yii\bootstrap\Html::a('删除',['user/del','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-trash'])?>　
+            <?= \Yii::$app->user->can('user/edit')?\yii\bootstrap\Html::a('修改',['user/edit','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-pencil']):''?>　
+            <?= \Yii::$app->user->can('user/del')?\yii\bootstrap\Html::a('删除',['user/del','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-trash']):''?>　
             <?= \yii\bootstrap\Html::a('角色',['user/edit-role','id'=>$user->id],['class'=>'btn btn-default glyphicon glyphicon-lock'])?>
         </td>
     </tr>

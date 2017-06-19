@@ -10,13 +10,15 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    //语言
+    'language'=>'zh-CN',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => \frontend\models\Member::className(),
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -47,7 +49,7 @@ return [
         'urlManager' => [   //地址管理
             'enablePrettyUrl' => true, //开启美化地址
             'showScriptName' => false, //显示脚本文件
-//            'suffix' => '.html',	// 伪静态后缀
+            'suffix' => '.html',	// 伪静态后缀
             'rules' => [ //自定义路由规则
             ],
         ],

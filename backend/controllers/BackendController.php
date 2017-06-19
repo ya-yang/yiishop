@@ -5,9 +5,8 @@ namespace backend\controllers;
 
 
 use backend\components\RbacFilter;
-use yii\base\Controller;
 
-class BackendController extends Controller
+class BackendController extends \yii\web\Controller
 {
     //添加权限
     public function behaviors()

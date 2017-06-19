@@ -2,8 +2,10 @@
 
 namespace backend\controllers;
 
+use backend\components\RbacFilter;
 use backend\models\Brand;
 use xj\uploadify\UploadAction;
+use yii\base\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Request;
 use yii\web\UploadedFile;
@@ -11,7 +13,17 @@ use crazyfd\qiniu\Qiniu;
 
 class BrandController extends BackendController
 {
+    //添加页面权限
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['index','add','edit','hidde','delete'],
+            ],
 
+        ];
+    }
     //列表页面
     public function actionIndex()
     {

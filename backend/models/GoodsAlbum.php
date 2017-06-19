@@ -29,7 +29,7 @@ class GoodsAlbum extends \yii\db\ActiveRecord
     {
         return [
             [['goods_id'], 'integer'],
-            ['imgFile','file','extensions'=>['jpg','jpeg','gif','png'],'skipOnEmpty'=>false]
+            ['imgFile','file','extensions'=>['jpg','jpeg','gif','png']]
         ];
     }
 

@@ -12,7 +12,7 @@ echo '　'.\yii\bootstrap\Html::submitButton('搜索',['class'=>'btn btn-success
 \yii\bootstrap\ActiveForm::end();
 ?>
 
-<?= \yii\bootstrap\Html::a('添加商品',['goods/add'],['class'=>'btn btn-default'])?>
+<?=\Yii::$app->user->can('goods/add')? \yii\bootstrap\Html::a('添加商品',['goods/add'],['class'=>'btn btn-default']):''?>
 <table class="table table-hover table-striped">
     <tr>
         <td>ID</td>

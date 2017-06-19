@@ -13,6 +13,7 @@ use backend\models\GoodsIntro;
 use backend\models\GoodsSearchForm;
 use kucha\ueditor\UEditor;
 use xj\uploadify\UploadAction;
+use yii\base\Controller;
 use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -21,7 +22,17 @@ use yii\web\UploadedFile;
 
 class GoodsController extends BackendController
 {
+    //添加页面权限
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['index','add','edit','del'],
+            ],
 
+        ];
+    }
 
     //列表
     public function actionIndex()
@@ -59,7 +70,7 @@ class GoodsController extends BackendController
                     $daycount->save();
                 }
                 //%d - 包含正负号的十进制数（负数、0、正数）
-                $model->sn=date('Ymd').sprintf("%05d",$goodscount->count+1);
+                $model->sn=date('Ymd').sprintf("%05d",($goodscount->count)+1);
                 //保存goods表
                 $model->save();
                 //保存intro表
@@ -117,7 +128,6 @@ class GoodsController extends BackendController
         return $this->redirect(['goods/index']);
 
     }
-
 
     //配置
     public function actions()

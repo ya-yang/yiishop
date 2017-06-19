@@ -1,8 +1,6 @@
 <?php
 use kartik\file\FileInput;
-$form=\yii\bootstrap\ActiveForm::begin([
-    'options' => ['enctype'=>'multipart/form-data'],
-]);
+$form=\yii\bootstrap\ActiveForm::begin();
 echo $form->field($model, 'imgFile')->label('相册')->widget(FileInput::classname(), [
     'options' => ['multiple' => true],
     'pluginOptions' => [

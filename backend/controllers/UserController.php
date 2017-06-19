@@ -53,7 +53,7 @@ class UserController extends \yii\web\Controller
                 }
                 \Yii::$app->session->setFlash('success','注册成功');
                 \Yii::$app->user->login($model);
-                return $this->redirect(['user/index']);
+                return $this->redirect(['user/indexs']);
             }else{
                 var_dump($model->getErrors());
 
@@ -139,7 +139,7 @@ class UserController extends \yii\web\Controller
             if($model->validate()){
                 //跳转到检测页面
 
-                return $this->redirect(['user/index']);
+                return $this->redirect(['user/indexs']);
             }else{
                 var_dump($model->getErrors());
 
@@ -147,6 +147,10 @@ class UserController extends \yii\web\Controller
         }
         return $this->render('login',['model'=>$model]);
 
+    }
+    //测试
+    public function actionIndexs(){
+        return  $this->render('indexs');
     }
 
     //测试

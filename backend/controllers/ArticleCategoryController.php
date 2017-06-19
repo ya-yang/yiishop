@@ -2,12 +2,23 @@
 
 namespace backend\controllers;
 
+use backend\components\RbacFilter;
 use backend\models\ArticleCategory;
 use yii\web\Request;
 
 class ArticleCategoryController extends BackendController
 {
+//添加页面权限
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['index','add','edit','delete'],
+            ],
 
+        ];
+    }
     //列表
     public function actionIndex()
     {

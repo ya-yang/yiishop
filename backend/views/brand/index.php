@@ -9,7 +9,7 @@
     <title></title>
 </head>
 <body>
-<?=\yii\bootstrap\Html::a('添加品牌',['brand/add'],['class'=>'btn btn-default'])?><br/><br/>
+<?=\Yii::$app->user->can('brand/add')?\yii\bootstrap\Html::a('添加品牌',['brand/add'],['class'=>'btn btn-default']):''?><br/><br/>
 <div class="userLists">
     <table class="table table-striped table-hover">
         <tr>
@@ -31,9 +31,9 @@
                 <td><?=$brand->sort?></td>
                 <td><?=$brand->status?'正常':'隐藏'?></td>
                 <td>
-                    <?= \Yii::$app->user->can('brand/edit')?\yii\bootstrap\Html::a('修改',['brand/edit','id'=>$brand->id]):''?> /
-                    <?= \Yii::$app->user->can('brand/hidden')?\yii\bootstrap\Html::a('隐藏',['brand/hidden','id'=>$brand->id]):''?> /
-                    <?=\Yii::$app->user->can('brand/del')?\yii\bootstrap\Html::a('删除',['brand/delete','id'=>$brand->id],['onclick'=>'return notice()']):''?>
+                    <?= \Yii::$app->user->can('brand/edit')?\yii\bootstrap\Html::a('修改',['brand/edit','id'=>$brand->id],['class'=>'btn btn-xs btn-default']):''?>
+                    <?= \Yii::$app->user->can('brand/hidden')?\yii\bootstrap\Html::a('隐藏',['brand/hidden','id'=>$brand->id,['class'=>'btn btn-xs btn-default']]):''?>
+                    <?=\Yii::$app->user->can('brand/delete')?\yii\bootstrap\Html::a('删除',['brand/delete','id'=>$brand->id],['class'=>'btn btn-xs btn-default'],['onclick'=>'return notice()']):''?>
                 </td>
             </tr>
         <?php endforeach;?>

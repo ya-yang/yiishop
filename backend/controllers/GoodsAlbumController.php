@@ -4,9 +4,10 @@ namespace backend\controllers;
 
 use backend\models\GoodsAlbum;
 use yii\helpers\Url;
+use yii\web\Controller;
 use yii\web\UploadedFile;
 
-class GoodsAlbumController extends BackendController
+class GoodsAlbumController extends Controller
 {
     public function actionIndex()
     {

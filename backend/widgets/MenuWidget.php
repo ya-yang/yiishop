@@ -21,7 +21,7 @@ class MenuWidget extends Widget
             ],
         ]);
         $menuItems = [
-        ['label' => '首页', 'url' => ['/goods/index']],
+        ['label' => '首页', 'url' => ['/user/indexs']],
         ];
         if (\Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => '登录', 'url' =>\Yii::$app->user->loginUrl];

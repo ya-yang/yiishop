@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 ?>
 <h3>商品分类列表</h3>
-<?=\yii\bootstrap\Html::a('添加分类',['goods-category/add'],['class'=>'btn btn-default']) ?>
+<?=\Yii::$app->user->can('goods-category/add')?\yii\bootstrap\Html::a('添加分类',['goods-category/add'],['class'=>'btn btn-default']):'' ?>
 <table class="cate table table-bordered">
     <tr>
         <td>ID</td>
