@@ -4,7 +4,8 @@
 namespace frontend\assets;
 
 
-use kartik\base\AssetBundle;
+
+use yii\web\AssetBundle;
 
 class AddressAsset extends AssetBundle
 {

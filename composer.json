@@ -22,7 +22,8 @@
         "crazyfd/yii2-qiniu": "dev-master",
         "creocoder/yii2-nested-sets": "^0.9.0",
         "kucha/ueditor": "*",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "chenkby/yii2-region": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

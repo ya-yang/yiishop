@@ -6,10 +6,9 @@
     </div>
     <div class="login_bd">
         <div class="login_form fl">
-
             <?php
             $form=\yii\widgets\ActiveForm::begin(
-                ['class'=>'regist','fieldConfig'=>[
+                ['fieldConfig'=>[
                     'options'=>['tag'=>'li'],
                     'errorOptions'=>['tag'=>'p'],
 
@@ -22,7 +21,7 @@
                     'template'=>'{input}{image}',
                 ]
             );
-            echo $form->field($model,'remember')->checkbox()->label('');
+            echo $form->field($model,'remember',['options'=>['class'=>'login_form fl']])->checkbox(['p'=>'保存登录信息'])->label('');
 
             echo '<label for="">&nbsp;</label>'.\yii\helpers\Html::submitButton('',['class'=>'login_btn']);
             echo '</ul>';

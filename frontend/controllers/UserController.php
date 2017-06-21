@@ -17,7 +17,6 @@ class UserController extends \yii\web\Controller
         $model=new Member();
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
                 $model->save(false);
-                \Yii::$app->session->setFlash('success','注册成功');
                 return $this->redirect('index.html');
 
         }
@@ -27,7 +26,6 @@ class UserController extends \yii\web\Controller
     public function actionLogin(){
         $model=new LoginForm();
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
-            \Yii::$app->session->setFlash('success','登录成功');
             return $this->redirect('test.html');
         }
 
@@ -42,10 +40,6 @@ class UserController extends \yii\web\Controller
         \Yii::$app->user->logout();
         return  $this->redirect('login.html');
     }
-    //地址
-    public function actionAddress(){
-        $this->layout='address';
-        return $this->render('address');
-    }
+
 
 }

@@ -4,12 +4,13 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
+use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
-\frontend\assets\AddressAsset::register($this);
+\frontend\assets\LoginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -31,7 +32,7 @@ use common\widgets\Alert;
         </div>
         <div class="topnav_right fr">
             <ul>
-                <li><?= Yii::$app->user->isGuest?'[<a href="/user/login.html">登录</a>][<a href="/user/register.html">免费注册</a>]':'您好:'.Yii::$app->user->identity->username.'，欢迎来到京西！' .'[<a href="/user/logout.html">注销</a>]'?>  </li>
+                <li>您好，欢迎来到京西！<?= Yii::$app->user->isGuest?'[<a href="/user/login.html">登录</a>][<a href="/user/register.html">免费注册</a>]':Yii::$app->user->identity->username ?>  </li>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>
@@ -49,7 +50,7 @@ use common\widgets\Alert;
 <div class="header w1210 bc mt15">
     <!-- 头部上半部分 start 包括 logo、搜索、用户中心和购物车结算 -->
     <div class="logo w1210">
-        <h1 class="fl"><a href="index.html"> <a href=""><?= Html::img('@web/images/logo.png',['alt'=>'京西商城']) ?></a></h1>
+        <h1 class="fl"><a href="index.html"><img src="images/logo.png" alt="京西商城"></a></h1>
         <!-- 头部搜索 start -->
         <div class="search fl">
             <div class="search_form">
@@ -137,13 +138,13 @@ use common\widgets\Alert;
     <!-- 导航条部分 start -->
     <div class="nav w1210 bc mt10">
         <!--  商品分类部分 start-->
-        <div class="category fl cat1"> <!-- 非首页，需要添加cat1类 -->
+        <div class="category fl"> <!-- 非首页，需要添加cat1类 -->
             <div class="cat_hd">  <!-- 注意，首页在此div上只需要添加cat_hd类，非首页，默认收缩分类时添加上off类，鼠标滑过时展开菜单则将off类换成on类 -->
                 <h2>全部商品分类</h2>
                 <em></em>
             </div>
 
-            <div class="cat_bd none">
+            <div class="cat_bd">
 
                 <div class="cat item1">
                     <h3><a href="">图像、音像、数字商品</a> <b></b></h3>
@@ -430,129 +431,14 @@ use common\widgets\Alert;
 
 <div style="clear:both;"></div>
 
+<!--页面主体-->
+<?= $content ?>
 
 
 
-<!--主体部分 start-->
-<div class="container">
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    <?= Alert::widget() ?>
-    <!-- 页面主体 start -->
-    <div class="main w1210 bc mt10">
-        <div class="crumb w1210">
-            <h2><strong>我的XX </strong><span>> 我的订单</span></h2>
-        </div>
-
-        <!-- 左侧导航菜单 start -->
-        <div class="menu fl">
-            <h3>我的XX</h3>
-            <div class="menu_wrap">
-                <dl>
-                    <dt>订单中心 <b></b></dt>
-                    <dd><b>.</b><a href="">我的订单</a></dd>
-                    <dd><b>.</b><a href="">我的关注</a></dd>
-                    <dd><b>.</b><a href="">浏览历史</a></dd>
-                    <dd><b>.</b><a href="">我的团购</a></dd>
-                </dl>
-
-                <dl>
-                    <dt>账户中心 <b></b></dt>
-                    <dd class="cur"><b>.</b><a href="">账户信息</a></dd>
-                    <dd><b>.</b><a href="">账户余额</a></dd>
-                    <dd><b>.</b><a href="">消费记录</a></dd>
-                    <dd><b>.</b><a href="">我的积分</a></dd>
-                    <dd><b>.</b><a href="">收货地址</a></dd>
-                </dl>
-
-                <dl>
-                    <dt>订单中心 <b></b></dt>
-                    <dd><b>.</b><a href="">返修/退换货</a></dd>
-                    <dd><b>.</b><a href="">取消订单记录</a></dd>
-                    <dd><b>.</b><a href="">我的投诉</a></dd>
-                </dl>
-            </div>
-        </div>
-        <!-- 左侧导航菜单 end -->
-    <?= $content ?>
-    </div>
-    <!-- 页面主体 end-->
-</div>
-<!--主体部分 end-->
-
-
-
-<!--尾部  start-->
 <footer class="footer">
-    <div style="clear:both;"></div>
-
-    <!-- 底部导航 start -->
-    <div class="bottomnav w1210 bc mt10">
-        <div class="bnav1">
-            <h3><b></b> <em>购物指南</em></h3>
-            <ul>
-                <li><a href="">购物流程</a></li>
-                <li><a href="">会员介绍</a></li>
-                <li><a href="">团购/机票/充值/点卡</a></li>
-                <li><a href="">常见问题</a></li>
-                <li><a href="">大家电</a></li>
-                <li><a href="">联系客服</a></li>
-            </ul>
-        </div>
-
-        <div class="bnav2">
-            <h3><b></b> <em>配送方式</em></h3>
-            <ul>
-                <li><a href="">上门自提</a></li>
-                <li><a href="">快速运输</a></li>
-                <li><a href="">特快专递（EMS）</a></li>
-                <li><a href="">如何送礼</a></li>
-                <li><a href="">海外购物</a></li>
-            </ul>
-        </div>
-
-
-        <div class="bnav3">
-            <h3><b></b> <em>支付方式</em></h3>
-            <ul>
-                <li><a href="">货到付款</a></li>
-                <li><a href="">在线支付</a></li>
-                <li><a href="">分期付款</a></li>
-                <li><a href="">邮局汇款</a></li>
-                <li><a href="">公司转账</a></li>
-            </ul>
-        </div>
-
-        <div class="bnav4">
-            <h3><b></b> <em>售后服务</em></h3>
-            <ul>
-                <li><a href="">退换货政策</a></li>
-                <li><a href="">退换货流程</a></li>
-                <li><a href="">价格保护</a></li>
-                <li><a href="">退款说明</a></li>
-                <li><a href="">返修/退换货</a></li>
-                <li><a href="">退款申请</a></li>
-            </ul>
-        </div>
-
-        <div class="bnav5">
-            <h3><b></b> <em>特色服务</em></h3>
-            <ul>
-                <li><a href="">夺宝岛</a></li>
-                <li><a href="">DIY装机</a></li>
-                <li><a href="">延保服务</a></li>
-                <li><a href="">家电下乡</a></li>
-                <li><a href="">京东礼品卡</a></li>
-                <li><a href="">能效补贴</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- 底部导航 end -->
-
-    <div style="clear:both;"></div>
     <!-- 底部版权 start -->
-    <div class="footer w1210 bc mt10">
+    <div class="footer w1210 bc mt15">
         <p class="links">
             <a href="">关于我们</a> |
             <a href="">联系我们</a> |
@@ -574,11 +460,10 @@ use common\widgets\Alert;
             <a href=""><?= Html::img('@web/images/kexin.jpg') ?></a>
             <a href=""><?= Html::img('@web/images/police.jpg') ?></a>
             <a href=""><?= Html::img('@web/images/beian.gif') ?></a>
-        </p>>
+        </p>
     </div>
     <!-- 底部版权 end -->
 </footer>
-<!--尾部  end-->
 
 <?php $this->endBody() ?>
 </body>
