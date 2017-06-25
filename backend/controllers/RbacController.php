@@ -6,7 +6,7 @@ use backend\models\PermissionForm;
 use backend\models\RoleForm;
 use yii\web\NotFoundHttpException;
 
-class RbacController extends \yii\web\Controller
+class RbacController extends BackendController
 {
 
     //权限列表

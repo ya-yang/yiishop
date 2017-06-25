@@ -43,7 +43,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username','password','repassword','email', 'tel','code',], 'required'],
+            [['username','password','repassword','email', 'tel','code','smscode','read'], 'required'],
             [['last_login_time', 'last_login_ip', 'status', 'created_at', 'updated_at'], 'integer'],
             [['username'], 'string', 'max' => 50],
             [['auth_key'], 'string', 'max' => 32],
@@ -62,7 +62,8 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             //验证码
             ['code','captcha','captchaAction'=>'site/captcha'],
             //
-            ['smscode','safe']
+            ['smscode','validateSms'],
+            ['read','validateRead'],
         ];
     }
 
@@ -86,7 +87,20 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             'password'=>'密码：',
             'repassword'=>'确认密码：',
             'code'=>'验证码：',
+            'smscode'=>'验证码：',
+            'read'=>'',
         ];
+    }
+    public function validateSms(){
+        $value=Yii::$app->cache->get('tel_'.$this->tel);
+        if(!$value || $value != $this->smscode){
+            $this->addError('smscode','验证码错误');
+        }
+    }
+    public function validateRead(){
+        if(!$this->read){
+            $this->addError('read','请阅读用户协议');
+        }
     }
     public function beforeSave($insert)
     {

@@ -62,7 +62,6 @@ class GoodsController extends BackendController
                 //生成sn
                 //先根据日期查询daycount表
                 $goodscount=GoodsDayCount::findOne(['day'=>date('Y-m-d')]);
-
                 if($goodscount == null){
                     $daycount=new GoodsDayCount();
                     $daycount->day=date('Y-m-d');
@@ -70,7 +69,7 @@ class GoodsController extends BackendController
                     $daycount->save();
                 }
                 //%d - 包含正负号的十进制数（负数、0、正数）
-                $model->sn=date('Ymd').sprintf("%05d",($goodscount->count)+1);
+                $model->sn=date('Ymd').sprintf("%05d",$goodscount->count+1);
                 //保存goods表
                 $model->save();
                 //保存intro表
@@ -80,8 +79,8 @@ class GoodsController extends BackendController
                 $goodscount->day=date('Y-m-d');
                 $goodscount->count=($goodscount->count)+1;
                 $goodscount->save();
-                \Yii::$app->session->setFlash('success','添加成功');
-                return $this->redirect(['goods/index']);
+                \Yii::$app->session->setFlash('success','添加商品成功,请添加相册');
+                return $this->redirect(['/goods-album/album','id'=>$model->id]);
             }else{
                 var_dump($model->getErrors());
                 exit();
@@ -106,7 +105,7 @@ class GoodsController extends BackendController
                 //保存intro表
                 $intro->goods_id=$model->id;
                 $intro->save();
-                \Yii::$app->session->setFlash('success','添加成功');
+                \Yii::$app->session->setFlash('success','修改成功');
                 return $this->redirect(['goods/index']);
             }else{
                 var_dump($model->getErrors());
@@ -183,7 +182,7 @@ class GoodsController extends BackendController
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => "http://www.baidu.com",//图片访问路径前缀
+                    "imageUrlPrefix"  => "http://admin.yiishop.com",//图片访问路径前缀
                     "imagePathFormat" => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}" //上传保存路径
                 ],
             ]

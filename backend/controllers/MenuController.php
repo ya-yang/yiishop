@@ -6,7 +6,7 @@ use backend\models\Menu;
 use yii\helpers\ArrayHelper;
 use yii\web\Request;
 
-class MenuController extends \yii\web\Controller
+class MenuController extends BackendController
 {
     //列表
     public function actionIndex()

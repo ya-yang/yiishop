@@ -149,12 +149,3 @@
 <!-- 右侧内容区域 end -->
 
 
-<?php
-//加载地址数据
-$js=
-    <<<JS
-        
-
-JS;
-$this->registerJs($js);
-

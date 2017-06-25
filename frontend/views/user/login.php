@@ -21,7 +21,10 @@
                     'template'=>'{input}{image}',
                 ]
             );
-            echo $form->field($model,'remember',['options'=>['class'=>'login_form fl']])->checkbox(['p'=>'保存登录信息'])->label('');
+            echo $form->field($model,'remember',[
+                'template'=>"{label}\n{input}保存登录信息\n{hint}\n{error}",
+                //输出模板
+            ])->checkbox()->label('');
 
             echo '<label for="">&nbsp;</label>'.\yii\helpers\Html::submitButton('',['class'=>'login_btn']);
             echo '</ul>';

@@ -42,7 +42,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             // 'sn','intro',
-            [['name',  'logo', 'goods_category_id', 'brand_id', 'stock'], 'required'],
+            [['name',  'logo', 'goods_category_id', 'brand_id', 'stock','status'], 'required'],
             [['goods_category_id', 'brand_id', 'stock', 'is_on_sale', 'status', 'sort', 'create_time'], 'integer'],
             [['market_price', 'shop_price'], 'number'],
             [['name', 'sn'], 'string', 'max' => 20],
@@ -74,11 +74,14 @@ class Goods extends \yii\db\ActiveRecord
     public static function getBrand(){
         return ArrayHelper::map(Brand::find()->where(['status'=>1])->all(),'id','name');
     }
+    public function getBrands(){
+        return $this->hasOne(Brand::className(),['id'=>'brand_id']);
+    }
     public function getGoods_intro(){
         return $this->hasOne(GoodsIntro::className(),['goods_id'=>'id']);
     }
     public function getGoods_ablum(){
-        return $this->hasOne(GoodsAlbum::className(),['goods_id'=>'id']);
+        return $this->hasMany(GoodsAlbum::className(),['goods_id'=>'id']);
     }
     public function beforeSave($insert){
         if($insert){

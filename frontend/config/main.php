@@ -53,6 +53,15 @@ return [
             'rules' => [ //自定义路由规则
             ],
         ],
+        //配置短信组件
+        'sms'=>[
+            'class'=>\frontend\components\Sms::className(),
+            'app_key'    => '24479459',
+            'app_secret' => '98ac3b47f59e728826921249f1d2a9fb',
+            'sign_name'=>'杨雅的网站',
+            'template_code'=>'SMS_71475157',
+
+        ],
     ],
     'params' => $params,
 ];
