@@ -28,6 +28,9 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public $code;
     public $read;
     public $smscode;//短信验证码
+    const SCENARIO_REGISTER = 'register';
+    const SCENARIO_API_REGISTER = 'api_register';
+
 
     /**
      * @inheritdoc
@@ -60,7 +63,8 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             //验证电话
             ['tel','match','pattern'=>'/^1[3,4,5,7,8,9]\d{9}$/','message'=>'手机号码格式不正确'],
             //验证码
-            ['code','captcha','captchaAction'=>'site/captcha'],
+            ['code','captcha','on'=>self::SCENARIO_REGISTER,'captchaAction'=>'site/captcha'],
+            ['code','captcha','on'=>self::SCENARIO_API_REGISTER,'captchaAction'=>'api/captcha'],
             //
             ['smscode','validateSms'],
             ['read','validateRead'],

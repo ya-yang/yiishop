@@ -4,7 +4,7 @@
 namespace frontend\controllers;
 
 
-use app\models\Cart;
+use frontend\models\Cart;
 use backend\models\Goods;
 use yii\web\Controller;
 use yii\web\Cookie;
@@ -45,6 +45,7 @@ class CartController extends Controller
                 'value'=>serialize($cart)
             ]);
             $cookiess->add($cookie);
+//            var_dump($cookiess->add($cookie));die;
         }else{
             //登录状态
             $model=new Cart();
@@ -114,7 +115,6 @@ class CartController extends Controller
         }
         //验证是游客登录
         if (\Yii::$app->user->isGuest) {
-
             //获取response里面的cookie
             $cookies = \Yii::$app->request->cookies;
             $cookie = $cookies->get('cart');

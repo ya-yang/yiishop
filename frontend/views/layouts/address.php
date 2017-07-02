@@ -104,9 +104,9 @@ use common\widgets\Alert;
                     <div class="viewlist mt10">
                         <h3>最近浏览的商品：</h3>
                         <ul>
-                            <li><a href=""><img src="images/view_list1.jpg" alt="" /></a></li>
-                            <li><a href=""><img src="images/view_list2.jpg" alt="" /></a></li>
-                            <li><a href=""><img src="images/view_list3.jpg" alt="" /></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
                         </ul>
                     </div>
                 </dd>

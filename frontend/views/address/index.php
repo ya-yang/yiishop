@@ -13,12 +13,9 @@
 
         <dl>
             <dt><?=$address->id?>.<?=$address->name?>
-                <?php $province=\app\models\Locations::findOne(['id'=>$address->province])?>
-                <?=$province->name?>
-                <?php $city=\app\models\Locations::findOne(['id'=>$address->city])?>
-                <?=$city->name?>
-                <?php $area=\app\models\Locations::findOne(['id'=>$address->area])?>
-                <?=$area->name?>
+                <?=$address->province?>
+                <?=$address->city?>
+                <?=$address->area?>
                 <?=$address->detail?>
                 <?=$address->tel?>
             </dt>
@@ -52,32 +49,31 @@
             );
             echo '<ul>';
             echo $form->field($model,'name')->textInput(['class'=>'txt'])->label('收 货 人：').'<br/>';
-
-
-
-        $url=\yii\helpers\Url::toRoute(['get-region']);
-
-        echo $form->field($model, 'province')->widget(\chenkby\region\Region::className(),[
-            'model'=>$model,
-            'url'=>$url,
-            'province'=>[
-                'attribute'=>'province',
-                'items'=>\frontend\models\Address::getRegion(),
-                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择省份']
-            ],
-            'city'=>[
-                'attribute'=>'city',
-                'items'=>\frontend\models\Address::getRegion($model['province']),
-                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择城市']
-            ],
-            'area'=>[
-                'attribute'=>'area',
-                'items'=>\frontend\models\Address::getRegion($model['city']),
-                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择县/区']
-            ]
-        ])->label('请 选 择：').'<br/>';
-
-
+            echo '<label for="">所在地区：</label>';
+            echo $form->field($model,'province',['template' => "{input}",'options'=>['tag'=>false]])->dropDownList([''=>'=选择省=']);
+            echo $form->field($model,'city',['template' => "{input}",'options'=>['tag'=>false]])->dropDownList([''=>'=选择市=']);
+            echo $form->field($model,'area',['template' => "{input}",'options'=>['tag'=>false]])->dropDownList([''=>'=选择县=']).'<br/><br/>';
+//        $url=\yii\helpers\Url::toRoute(['get-region']);
+////s
+//        echo $form->field($model, 'province')->widget(\chenkby\region\Region::className(),[
+//            'model'=>$model,
+//            'url'=>$url,
+//            'province'=>[
+//                'attribute'=>'province',
+//                'items'=>\frontend\models\Address::getRegion(),
+//                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择省份']
+//            ],
+//            'city'=>[
+//                'attribute'=>'city',
+//                'items'=>\frontend\models\Address::getRegion($model['province']),
+//                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择城市']
+//            ],
+//            'area'=>[
+//                'attribute'=>'area',
+//                'items'=>\frontend\models\Address::getRegion($model['city']),
+//                'options'=>['class'=>'form-control form-control-inline','prompt'=>'选择县/区']
+//            ]
+//        ])->label('所在地区：').'<br/>';
 
             echo $form->field($model,'detail')->textInput(['class'=>'txt address'])->label('详细地址：').'<br/>';
             echo $form->field($model,'tel')->textInput(['class'=>'txt'])->label('手机号码：').'<br/>';
@@ -87,65 +83,57 @@
 
             echo '</ul>';
          \yii\widgets\ActiveForm::end();
-
-
-
         ?>
-<!--        <form action="" name="address_form">-->
-<!---->
-<!--            <ul>-->
-<!--                <li>-->
-<!--                    <label for=""><span>*</span>收 货 人：</label>-->
-<!--                    <input type="text" name="" class="txt" />-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <label for=""><span>*</span>所在地区：</label>-->
-<!--                    <select name="province">-->
-<!--                        <option value="1">北京</option>-->
-<!--                        <option value="2">上海</option>-->
-<!--                        <option value="3">天津</option>-->
-<!--                        <option value="4">重庆</option>-->
-<!--                        <option value="5">武汉</option>-->
-<!--                    </select>-->
-<!---->
-<!--                    <select name="city" id="">-->
-<!--                        <option value="1">朝阳区</option>-->
-<!--                        <option value="2">东城区</option>-->
-<!--                        <option value="3">西城区</option>-->
-<!--                        <option value="4">海淀区</option>-->
-<!--                        <option value="5">昌平区</option>-->
-<!--                    </select>-->
-<!---->
-<!--                    <select name="area" id="">-->
-<!--                        <option value="1">请选择</option>-->
-<!--                        <option value="2">西二旗</option>-->
-<!--                        <option value="3">西三旗</option>-->
-<!--                        <option value="4">三环以内</option>-->
-<!--                    </select>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <label for=""><span>*</span>详细地址：</label>-->
-<!--                    <input type="text" name="" class="txt address"  />-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <label for=""><span>*</span>手机号码：</label>-->
-<!--                    <input type="text" name="" class="txt" />-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <label for="">&nbsp;</label>-->
-<!--                    <input type="checkbox" name="" class="check" />设为默认地址-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <label for="">&nbsp;</label>-->
-<!--                    <input type="submit" name="" class="btn" value="保存" />-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </form>-->
     </div>
-
-
 
 </div>
 <!-- 右侧内容区域 end -->
 
+<?php
+$this->registerJsFile('@web/js/address.js');
+$this->registerJs(new \yii\web\JsExpression(
+    <<<JS
+        $(address).each(function() {
+          var option = '<option value="'+this.name+'">'+this.name+'</option>'; 
+          $('#address-province').append(option);
+        });
+        //选择市
+        $('#address-province').change(function() {
+          //获取选中的省
+          var province = $(this).val();
+            $(address).each(function() {
+               if(this.name == province){
+                   var option = '<option value="">=请选择市=</option>';
+                   $(this.city).each(function(){
+                        option += '<option value="'+this.name+'">'+this.name+'</option>';     
+                      
+                   });
+                     $('#address-city').html(option);
+               }
+            })
+        });
+        $('#address-city').change(function(){
+            var province=$('#address-province').val();
+            var city=$(this).val();
+            $(address).each(function(){
+                if(this.name == province){
+                    $(this.city).each(function(){
+                        if(this.name == city){
+                            var option = '<option value="">=请选地区=</option>';
+                            $(this.area).each(function(i,v){
+                                 option += '<option value="'+v+'">'+v+'</option>';     
+                               });
+                                $('#address-area').html(option);
+                           }
+                    })
+                }
+            })
+        })
+     
+
+JS
+))
+
+
+?>
 

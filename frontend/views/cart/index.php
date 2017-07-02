@@ -3,6 +3,21 @@
  * @var $this \yii\web\View;
  */
 ?>
+    <!-- 页面头部 start -->
+<div class="header w990 bc mt15">
+        <div class="logo w990">
+            <h2 class="fl"><a href=""><?= \yii\helpers\Html::img('@web/images/logo.png',['alt'=>'京西商城']) ?></a></h2>
+            <div class="flow fr">
+                <ul>
+                    <li class="cur">1.我的购物车</li>
+                    <li>2.填写核对订单信息</li>
+                    <li>3.成功提交订单</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 页面头部 end -->
+    <div style="clear:both;"></div>
 <!-- 主体部分 start -->
 <div class="mycart w990 mt10 bc">
     <h2><span>我的购物车</span></h2>
@@ -38,8 +53,8 @@
         </tfoot>
     </table>
     <div class="cart_btn w990 bc mt10">
-        <a href="" class="continue">继续购物</a>
-        <a href="" class="checkout">结 算</a>
+        <a href="<?= Yii::$app->request->referrer?>" class="continue">继续购物</a>
+        <a href="<?=\yii\helpers\Url::to(['/order/index'])?>" class="checkout">结 算</a>
     </div>
 </div>
 <!-- 主体部分 end -->
@@ -56,23 +71,23 @@ $this->registerJs(new \yii\web\JsExpression(
          // console.debug(goods_id);
          $.post('$url',{'goods_id':goods_id,'amount':amount,"_csrf-frontend":"$token"},function(i,v) {
          })
-        })
+        });
         //删除
         $('.del_goods').click(function() {
             if(confirm('是否删除该商品')){
-                var dele=$(this)
+                var dele=$(this);
                 var goods_id=$(this).closest('tr').attr('data-goods_id');
                  $.post('$url',{'goods_id':goods_id,'amount':0,"_csrf-frontend":"$token"},function(i,v) {
                      dele.closest('tr').remove();
                 })
             }
-        })
+        });
         //总价格
        $(function(){
                 var totalPrice = 0;
                 $('.min_total').each(function() {
                   totalPrice += parseInt($(this).text())
-                })
+                });
                 $('#total').text(totalPrice)       
        })
         

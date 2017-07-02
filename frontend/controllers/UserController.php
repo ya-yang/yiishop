@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use app\models\Cart;
+use frontend\models\Cart;
 use frontend\models\LoginForm;
 use frontend\models\Member;
 use Flc\Alidayu\Client;
@@ -21,6 +21,7 @@ class UserController extends \yii\web\Controller
     //注册
     public function actionRegister(){
         $model=new Member();
+        $model->scenario = Member::SCENARIO_REGISTER;
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
                 $model->save(false);
                 return $this->redirect('login.html');
@@ -38,7 +39,7 @@ class UserController extends \yii\web\Controller
         }
         //发送短信
         $mscode= rand(100000, 999999);
-//        $res = \Yii::$app->sms->setNum($tel)->setParm(['name'=>\Yii::$app->request->post('username'),'mscode' => $mscode,])->send();
+        $res = \Yii::$app->sms->setNum($tel)->setParm(['name'=>\Yii::$app->request->post('username'),'mscode' => $mscode,])->send();
         $res=1;
         if($res){
             //存入缓存
@@ -52,11 +53,15 @@ class UserController extends \yii\web\Controller
     //登录
     public function actionLogin(){
         $model=new LoginForm();
+        $model->scenario = LoginForm::SCENARIO_LOGIN;
         if($model->load(\Yii::$app->request->post())&&$model->validate()){
+            //处理购物车数据
             $model=new Cart();
             $member_id=\Yii::$app->user->id;
+            //找所有商品
             $cart = ArrayHelper::map(Cart::findAll(['member_id' => $member_id]),'goods_id','amount');
             $cookies=\Yii::$app->request->cookies;
+            //获取cookie中的购物车
             $cookie=$cookies->get('cart');
             if($cookie == null){
                 $cart_cookie=[];
@@ -80,7 +85,8 @@ class UserController extends \yii\web\Controller
             //清除缓存;
             $cookiess=\Yii::$app->response->cookies;
             $cookiess->remove('cart');
-            return $this->redirect(['/index/index']);
+//            return $this->redirect(['/index/index']);
+            return $this->goBack();
         }
 
         return  $this->render('login',['model'=>$model]);

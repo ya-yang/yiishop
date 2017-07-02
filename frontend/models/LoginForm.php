@@ -12,12 +12,16 @@ class LoginForm extends Model
     public $password;
     public $code;
     public $remember;
+
+    const SCENARIO_API_LOGIN = 'api_login';
+    const SCENARIO_LOGIN = 'login';
     public function rules()
     {
        return [
            [['username','password'],'required'],
            ['remember','boolean'],
-           ['code','captcha'],
+           ['code','captcha','on'=>self::SCENARIO_LOGIN,],
+           ['code','captcha','on'=>self::SCENARIO_API_LOGIN,'captchaAction'=>'api/captcha'],
            ['username','validateUsername']
        ];
     }

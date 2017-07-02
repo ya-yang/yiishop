@@ -21,6 +21,7 @@ return [
             'identityClass' => \frontend\models\Member::className(),
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'loginUrl'=>['user/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -62,6 +63,7 @@ return [
             'template_code'=>'SMS_71475157',
 
         ],
+
     ],
     'params' => $params,
 ];

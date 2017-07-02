@@ -23,7 +23,7 @@ class CartAsset extends AssetBundle
         "style/footer.css"
     ];
     public $js = [
-        'js/cart1.js'
+        'js/cart1.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',

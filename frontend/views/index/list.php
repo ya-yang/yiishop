@@ -285,6 +285,7 @@
         <!-- 商品列表 end-->
 
         <!-- 分页信息 start -->
+
         <div class="page mt20">
             <?php
             echo \yii\widgets\LinkPager::widget([

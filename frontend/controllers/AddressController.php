@@ -5,14 +5,29 @@ namespace frontend\controllers;
 
 use frontend\models\Address;
 use frontend\models\Locations;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class AddressController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@'],
+                    ]
+                ],
+            ],
+        ];
+    }
     public $layout='address';
     //首页
     public function actionIndex(){
-        $models=Address::find()->all();
+        $models=Address::findAll(['member_id'=>\Yii::$app->user->id]);
         $model=new Address();
         if(\Yii::$app->request->isPost){
             if($model->load(\Yii::$app->request->post()) && $model->validate()){
@@ -78,15 +93,15 @@ class AddressController extends Controller
 
     }
     //配置
-    public function actions()
-    {
-        $actions=parent::actions();
-        $actions['get-region']=[
-            'class'=>\chenkby\region\RegionAction::className(),
-            'model'=>\frontend\models\Address::className()
-        ];
-        return $actions;
-    }
+//    public function actions()
+//    {
+//        $actions=parent::actions();
+//        $actions['get-region']=[
+//            'class'=>\chenkby\region\RegionAction::className(),
+//            'model'=>\frontend\models\Address::className()
+//        ];
+//        return $actions;
+//    }
 
 
 

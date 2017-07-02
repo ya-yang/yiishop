@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<table border="1" cellspacing="0">
+    <tr>
+        <th>商品名称</th>
+        <th>商品货号</th>
+        <th>商品logo</th>
+        <th>商品库存</th>
+    </tr>
+
+</table>
+<script>
+        $.getJSON('http://www.yiishop.com/api/goods-by-brand.html',{brand_id:2},function ($json) {
+          $($json.data).each(function () {
+              var html='<tr>';
+                  html+='<td>'+this.name+'</td>'
+                  html+='<td>'+this.sn+'</td>'
+                  html+='<td><img src="http://admin.yiishop.com" '+this.logo+'></td>'
+                  html+='<td>'+this.stock+'</td>'
+                  html+='</tr>';
+                  $('table').append(html);
+
+          })
+
+        })
+
+</script>
+</body>
+</html>

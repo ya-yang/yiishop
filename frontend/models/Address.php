@@ -61,10 +61,6 @@ class Address extends \yii\db\ActiveRecord
             'is_default' => '默认地址',
         ];
     }
-    public static function getRegion($parentId=0)
-    {
-        $result = static::find()->from('locations')->where(['parent_id'=>$parentId])->asArray()->all();
-        return ArrayHelper::map($result, 'id', 'name');
-    }
+
 
 }

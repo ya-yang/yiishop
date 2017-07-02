@@ -6,7 +6,7 @@
 <?php
 //搜索
 $form=\yii\bootstrap\ActiveForm::begin(['method'=>'get','action'=>\yii\helpers\Url::to(['goods/index']),'options'=>['class'=>'form-inline']]);
-echo $form->field($search,'name')->textInput(['placeholder'=>"商品名称"])->label(false);
+echo $form->field($search,'name')->textInput(['placeholder'=>"商品名称",'name'=>'keywords'])->label(false);
 echo $form->field($search,'sn')->textInput(['placeholder'=>"货号"])->label(false);
 echo '　'.\yii\bootstrap\Html::submitButton('搜索',['class'=>'btn btn-success']);
 \yii\bootstrap\ActiveForm::end();

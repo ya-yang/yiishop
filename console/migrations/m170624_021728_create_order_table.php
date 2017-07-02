@@ -26,7 +26,7 @@ class m170624_021728_create_order_table extends Migration
             'delivery_price' => $this->decimal(7,2)->comment('配送方式价格'),
             'payment_id' => $this->smallInteger(1)->comment('支付方式id'),
             'payment_name' => $this->string(20)->comment('支付方式名称'),
-            'price' => $this->decimal(10,2)->comment('订单金额'),
+            'total' => $this->decimal(10,2)->comment('订单金额'),
             'status' => $this->smallInteger(1)->comment('	订单状态（0已取消1待付款2待发货3待收货4完成）'),
             'trade_no' => $this->string(20)->comment('第三方支付交易号'),
             'create_time' => $this->integer()->comment('创建时间'),
