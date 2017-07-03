@@ -39,6 +39,8 @@ class ApiController extends Controller
 //    }
     //会员注册
     //用户注册
+
+    /*注册*/
     /**
      * @return array
      * 调用此接口时候要必须先调用验证码接口 和短信验证码接口
@@ -119,6 +121,11 @@ class ApiController extends Controller
         }
         return ['status'=>-1,'msg'=>'没有登录请登录'];
     }
+
+
+
+
+
     //添加地址
     public function actionAddressAdd(){
         //判断用户是否登录
@@ -186,6 +193,10 @@ class ApiController extends Controller
             }
             return ['status'=>-1,'msg'=>'没有登录请登录'];
     }
+
+
+
+
     //获取所有商品分类
     public function actionGoodsCateList(){
         $cates=GoodsCategory::find()->all();
@@ -217,6 +228,10 @@ class ApiController extends Controller
         }
         return ['status'=>-1,'msg'=>'提交方式错误'];
     }
+
+
+
+
     //获取某分类下面的所有商品
     public function actionGoodsByCate(){
         //查找分类的子分类 同树 左值大于 右值小于
@@ -259,6 +274,11 @@ class ApiController extends Controller
         }
         return ['status'=>'-1','msg'=>'参数不正确'];
     }
+
+
+
+
+
     //获取文章分类
     public function actionArticleCate(){
         $article=ArticleCategory::find()->all();
@@ -287,6 +307,13 @@ class ApiController extends Controller
         }
         return ['status'=>-1,'msg'=>'提交方式错误'];
     }
+
+
+
+
+
+
+
     //添加商品到购物车
     public function actionCartAddGoods(){
         //未登录
@@ -434,6 +461,10 @@ class ApiController extends Controller
             return ['status'=>1,'msg'=>'获取成功','data'=>$cart];
         }
     }
+
+
+
+
     //获取支付方式
     public function actionOrderPayType(){
         $payments=Order::$payments;
@@ -497,6 +528,13 @@ class ApiController extends Controller
         }
         return ['status'=>-1,'msg'=>'提交方式错误'];
     }
+
+
+
+
+
+
+
     //验证码
     public function actions()
     {
